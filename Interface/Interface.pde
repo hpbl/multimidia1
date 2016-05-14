@@ -9,7 +9,7 @@ AudioOutput out;
 Oscil       wave;
 float       rate, amp; 
 String cor = "Background";
-int backgroundCor = 102;
+int backgroundCor = 255;
 
 public void setup(){
   size(800, 600, JAVA2D);
@@ -22,9 +22,9 @@ public void setup(){
   //wave = new Oscil( 440, 2f, Waves.SAW );
   //wave.patch( out );
   
-  redFile = new SoundFile(this, "piano.wav");
-  greenFile = new SoundFile(this, "guitar.wav");
-  blueFile = new SoundFile(this, "bass.wav");
+  redFile = new SoundFile(this, "pianocortado.wav");
+  greenFile = new SoundFile(this, "guitarcortado.wav");
+  blueFile = new SoundFile(this, "basscortado.wav");
 }
 
 public void draw(){
@@ -34,8 +34,8 @@ public void draw(){
   
   if ((mousePressed) && (mouseInDrawingRange()) && cor!="Background"){
     line(mouseX, mouseY, pmouseX, pmouseY);
-    rate = mouseX/(sketchPad1.getX()+sketchPad1.getWidth());
-    amp = (mouseY-sketchPad1.getY())/(sketchPad1.getY()+sketchPad1.getHeight());
+    amp = map(mouseY, sketchPad1.getY(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 0);
+    rate = map(mouseX, sketchPad1.getX(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 2);
     filetoPlay.play(rate, amp);
     //wave.setAmplitude(map(mouseY, 0, height, 1, 0));
     //wave.setFrequency(map(mouseX, 0, width, 110, 880));
