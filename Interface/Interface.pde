@@ -22,6 +22,23 @@ public void setup(){
   customGUI();
   background(backgroundCor);
   
+  float w = sketchPad1.getX()+sketchPad1.getWidth();
+  float i = sketchPad1.getX();
+  
+  int larguraLinhas = int(w/12);
+  int linhas = 1;
+  while(linhas<12){
+    i=i+larguraLinhas;
+    line(i, sketchPad1.getY(),i,sketchPad1.getHeight());
+    linhas++;
+  }
+
+//  for(int i = 1; i<11; i++){
+    
+//   line(int ((sketchPad1.getWidth()/12*i)+sketchPad1.getX()), int(sketchPad1.getY()), int((sketchPad1.getWidth()/12*i)+sketchPad1.getX()), int(sketchPad1.getHeight()));
+    
+//  }
+  
   minim = new Minim(this);
   out = minim.getLineOut();  
   //wave = new Oscil( 440, 2f, Waves.SAW );
@@ -61,8 +78,43 @@ public void draw(){
     if ((mousePressed) && (mouseInDrawingRange()) && cor!="Background"){
       line(mouseX, mouseY, pmouseX, pmouseY);
       //amp = map(mouseY, sketchPad1.getY(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 0);
-      rate = map(mouseX, sketchPad1.getX(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 2);
-      nota = int(map(mouseY, sketchPad1.getY(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 0));
+      //rate = map(mouseX, sketchPad1.getX(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 2);
+      //nota = int(map(mouseX, sketchPad1.getX(), (sketchPad1.getX()+sketchPad1.getWidth()), 60, 71));
+      float m1 = mouseX;
+      
+      float w = sketchPad1.getX()+sketchPad1.getWidth();
+      float i = sketchPad1.getX();
+  
+      int larg = int(w/12);
+      
+      if(m1<i+larg){
+        nota = 60;
+      }else if(m1<i+larg*2){
+        nota = 61;
+      }else if(m1<i+larg*3){
+        nota = 62;
+      }else if(m1<i+larg*4){
+        nota = 63;
+      }else if(m1<i+larg*5){
+        nota = 64;
+      }else if(m1<i+larg*6){
+        nota = 65;
+      }else if(m1<i+larg*7){
+        nota = 66;
+      }else if(m1<i+larg*8){
+        nota = 67;
+      }else if(m1<i+larg*9){
+        nota = 68;
+      }else if(m1<i+larg*10){
+        nota = 69;
+      }else if(m1<i+larg*11){
+        nota = 70;
+      }else if(m1<i+larg*12){
+        nota = 71;
+      }        
+      
+      
+      
       //filetoPlay.loop();
       //player.loop();
       midi.setMidiNoteIn( nota );
