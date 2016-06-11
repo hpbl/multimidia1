@@ -17,16 +17,28 @@
 public void clickRedButton(GButton source, GEvent event) { //_CODE_:buttonRed:352242:
   //println("buttonRed - GButton >> GEvent." + event + " @ " + millis());
   changeColor("Red");
+  
+  buttonRed.setText("cor escolhida");
+  buttonGreen.setText("");
+  buttonBlue.setText("");
 } //_CODE_:buttonRed:352242:
 
 public void clickGreenButton(GButton source, GEvent event) { //_CODE_:buttonGreen:312446:
   //println("buttonGreen - GButton >> GEvent." + event + " @ " + millis());
   changeColor("Green");
+  
+  buttonRed.setText("");
+  buttonGreen.setText("cor escolhida");
+  buttonBlue.setText("");
 } //_CODE_:buttonGreen:312446:
 
 public void clickBlueButton(GButton source, GEvent event) { //_CODE_:blueButton:505366:
   //println("blueButton - GButton >> GEvent." + event + " @ " + millis());
   changeColor("Blue");
+  
+  buttonRed.setText("");
+  buttonGreen.setText("");
+  buttonBlue.setText("cor escolhida");
 } //_CODE_:blueButton:505366:
 
 
@@ -37,20 +49,23 @@ public void createGUI(){
   G4P.messagesEnabled(false);
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setCursor(ARROW);
+  
   surface.setTitle("Sketch Window");
   labelCor = new GLabel(this, 0, 550, 200, 50);
   labelCor.setText("escolha a cor:");
   labelCor.setTextBold();
   labelCor.setOpaque(true);
+  
   sketchPad1 = new GSketchPad(this, 20, 20, 760, 510);
+  
   buttonRed = new GButton(this, 200, 550, 200, 50);
   buttonRed.setLocalColorScheme(GCScheme.RED_SCHEME);
   buttonRed.addEventHandler(this, "clickRedButton");
   buttonGreen = new GButton(this, 400, 550, 200, 50);
   buttonGreen.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   buttonGreen.addEventHandler(this, "clickGreenButton");
-  blueButton = new GButton(this, 600, 550, 200, 50);
-  blueButton.addEventHandler(this, "clickBlueButton");
+  buttonBlue = new GButton(this, 600, 550, 200, 50);
+  buttonBlue.addEventHandler(this, "clickBlueButton");
 }
 
 // Variable declarations 
@@ -59,4 +74,4 @@ GLabel labelCor;
 GSketchPad sketchPad1; 
 GButton buttonRed; 
 GButton buttonGreen; 
-GButton blueButton; 
+GButton buttonBlue; 
