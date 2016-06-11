@@ -77,7 +77,7 @@ public void draw(){
   //} else {
     if ((mousePressed) && (mouseInDrawingRange()) && cor!="Background"){
       line(mouseX, mouseY, pmouseX, pmouseY);
-<<<<<<< HEAD
+
       //amp = map(mouseY, sketchPad1.getY(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 0);
       //rate = map(mouseX, sketchPad1.getX(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 2);
       //nota = int(map(mouseX, sketchPad1.getX(), (sketchPad1.getX()+sketchPad1.getWidth()), 60, 71));
@@ -118,7 +118,7 @@ public void draw(){
 
       amp = map(mouseY, sketchPad1.getY(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 0);
       //rate = map(mouseX, sketchPad1.getX(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 2);
-      nota = int(map(mouseX, sketchPad1.getX(), (sketchPad1.getX()+sketchPad1.getHeight()), 60, 71));
+      //nota = int(map(mouseX, sketchPad1.getX(), (sketchPad1.getX()+sketchPad1.getHeight()), 60, 71));
 
 
       //filetoPlay.loop();
