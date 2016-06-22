@@ -16,6 +16,8 @@ int backgroundCor = 255;
 int nota = 0;
 boolean shouldPlay = false;
 
+int notaOffset = 0;
+
 public void setup(){
   size(800, 600, JAVA2D);
   createGUI();
@@ -114,7 +116,7 @@ public void draw(){
         nota = 71;
       }        
       
-      
+      nota = nota + notaOffset;
 
       amp = map(mouseY, sketchPad1.getY(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 0);
       //rate = map(mouseX, sketchPad1.getX(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 2);
@@ -149,16 +151,19 @@ public void confereCor() {
     stroke(255, 0, 0,(height-mouseY));
     filetoPlay = redFile;
     nota = 60;
+    notaOffset = -13;
   }
   else if (cor == "Green") {
     stroke(0, 255, 0,(height-mouseY));
     filetoPlay = greenFile;
     nota = 67;
+    notaOffset = 0;
   }
   else if (cor == "Blue") {
     stroke(0, 0, 255,(height-mouseY));
     filetoPlay = blueFile;
     nota = 64;
+    notaOffset = 13;
   }
   else {
     stroke(backgroundCor);
