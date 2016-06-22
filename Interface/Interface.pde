@@ -122,7 +122,12 @@ public void draw(){
       //rate = map(mouseX, sketchPad1.getX(), (sketchPad1.getY()+sketchPad1.getHeight()), 1, 2);
       //nota = int(map(mouseX, sketchPad1.getX(), (sketchPad1.getX()+sketchPad1.getHeight()), 60, 71));
 
-
+      ///
+      wave.setAmplitude(amp);
+      midi.patch( wave.frequency );
+      ///
+      
+      //wave.patch( out );
       //filetoPlay.loop();
       //player.loop();
       midi.setMidiNoteIn(nota);
