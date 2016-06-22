@@ -29,6 +29,7 @@ public void setup(){
   
   int larguraLinhas = int(w/12);
   int linhas = 1;
+  stroke(0,0,0,50);
   while(linhas<12){
     i=i+larguraLinhas;
     line(i, sketchPad1.getY(),i,sketchPad1.getHeight());
