@@ -151,7 +151,7 @@ public void confereCor() {
     stroke(255, 0, 0,(height-mouseY));
     filetoPlay = redFile;
     nota = 60;
-    notaOffset = -13;
+    notaOffset = -12;
   }
   else if (cor == "Green") {
     stroke(0, 255, 0,(height-mouseY));
@@ -163,7 +163,7 @@ public void confereCor() {
     stroke(0, 0, 255,(height-mouseY));
     filetoPlay = blueFile;
     nota = 64;
-    notaOffset = 13;
+    notaOffset = 12;
   }
   else {
     stroke(backgroundCor);
