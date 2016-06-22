@@ -20,6 +20,7 @@ String cor = "Background";
 int backgroundCor = 255;
 int nota = 0;
 boolean shouldPlay = false;
+boolean microfone = false;
 
 int notaOffset = 0;
 
@@ -138,7 +139,11 @@ public void draw() {
     //wave.patch( out );
     //filetoPlay.loop();
     //player.loop();
-    midi.setMidiNoteIn(nota);
+    if(microfone == false) {
+      midi.setMidiNoteIn(nota); 
+    } else {
+      midi.setMidiNoteIn(0); 
+    }
   } else {
     midi.setMidiNoteIn(0);
   }
@@ -160,6 +165,11 @@ void keyPressed() {
     countAudios++;
     recorder = minim.createRecorder(input, "audio" + countAudios + ".wav", true);
     recorder.beginRecord();
+  } else if (key == 'm') {
+    countAudios++;
+    recorder = minim.createRecorder(input, "audio" + countAudios + ".wav", true);
+    recorder.beginRecord();
+    microfone = true;
   }
 }
 
@@ -169,6 +179,12 @@ void keyReleased() {
     recorder.save();
     loopPlayer = minim.loadFile("audio" + countAudios + ".wav");
     loopPlayer.loop();
+  } else if (key == 'm') {
+    recorder.endRecord();
+    recorder.save();
+    loopPlayer = minim.loadFile("audio" + countAudios + ".wav");
+    loopPlayer.loop();
+    microfone = false;
   }
 }
 
