@@ -22,6 +22,7 @@ boolean microfone = false;
 boolean gravando = false;
 
 int notaOffset = 0;
+int tamanhoPincel;
 
 public void setup() {
     size(800, 600, JAVA2D);
@@ -39,6 +40,8 @@ public void setup() {
         i = i + larguraLinhas;
         line(i, sketchPad1.getY(), i, sketchPad1.getHeight());
         linhas++;
+        
+    tamanhoPincel = 6;
     }
 
     minim = new Minim(this);
@@ -62,7 +65,7 @@ public void draw() {
 
     if ((mousePressed) && (mouseInDrawingRange()) && cor != "Background") {
         //grossura da reta = 6
-        strokeWeight(6);
+        strokeWeight(tamanhoPincel);
         line(mouseX, mouseY, pmouseX, pmouseY);
         //grossura da reta = 2
         strokeWeight(2);
@@ -146,6 +149,12 @@ void keyPressed() {
         recorder = minim.createRecorder(input, "audio" + countAudios + ".wav", true);
         recorder.beginRecord();
         microfone = true;
+    }
+    else if (key == '+') {
+        tamanhoPincel = tamanhoPincel + 2;
+    }
+    else if (key == '-') {
+        tamanhoPincel = tamanhoPincel - 2;
     }
 }
 
