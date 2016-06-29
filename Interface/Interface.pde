@@ -23,6 +23,30 @@ boolean gravando = false;
 
 int notaOffset = 0;
 
+ArrayList<Bola> bolas = new ArrayList<Bola>();
+
+public class Bola {
+    int px;
+    int py;
+    int vx;
+    int vy;
+    int ay;
+    
+    public Bola (int x, int y) {
+        px = x;
+        py = y;
+        vx = (int) random(-5, 5);
+        vy = (int) random(-15, 0);
+        ay = 1;
+    }
+    
+    public void inc () {
+        px = px + vx;
+        py = py + vy;
+        vy = vy + ay;
+    }
+}
+
 public void setup() {
     size(800, 600, JAVA2D);
     createGUI();
@@ -59,6 +83,17 @@ public void setup() {
 public void draw() {
     confereCor();
     colorMode(RGB, 255, 255, 255, height);
+    
+    for (int i = 0; i < bolas.size(); i++) {
+        bolas.get(i).inc();
+        if (bolas.get(i).py > 600) {
+            bolas.remove(bolas.get(i));
+        }
+        else {
+            ellipse(bolas.get(i).px, bolas.get(i).py, 3, 3);
+            //noStroke();
+        }
+    }
 
     if ((mousePressed) && (mouseInDrawingRange()) && cor != "Background") {
         //grossura da reta = 6
@@ -70,6 +105,10 @@ public void draw() {
         int desvio = 10;
         //minireta
         line(mouseX + random(-desvio,desvio), mouseY + random(-desvio,desvio), pmouseX + random(-desvio,desvio), pmouseY + random(-desvio,desvio));
+        if (random(10) > 9) {
+            Bola currBola = new Bola(mouseX, mouseY);
+            bolas.add(currBola);
+        }
 
         float m1 = mouseX;
 
