@@ -34,7 +34,7 @@ public void setup() {
 
     int larguraLinhas = int(w/12);
     int linhas = 1;
-    stroke(0,0,0,50);
+    stroke(0,0,0,18);
     while(linhas < 12){
         i = i + larguraLinhas;
         line(i, sketchPad1.getY(), i, sketchPad1.getHeight());
@@ -61,7 +61,15 @@ public void draw() {
     colorMode(RGB, 255, 255, 255, height);
 
     if ((mousePressed) && (mouseInDrawingRange()) && cor != "Background") {
+        //grossura da reta = 6
+        strokeWeight(6);
         line(mouseX, mouseY, pmouseX, pmouseY);
+        //grossura da reta = 2
+        strokeWeight(2);
+        //o quão longe a minireta em volta da reta principal vai ser desenhada
+        int desvio = 10;
+        //minireta
+        line(mouseX + random(-desvio,desvio), mouseY + random(-desvio,desvio), pmouseX + random(-desvio,desvio), pmouseY + random(-desvio,desvio));
 
         float m1 = mouseX;
 
