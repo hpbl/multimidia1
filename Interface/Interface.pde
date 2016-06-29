@@ -181,7 +181,6 @@ public void draw() {
     else {
         midi.setMidiNoteIn(0);
     }
-
 }
 
 void keyPressed() {
@@ -228,6 +227,9 @@ void keyPressed() {
     }
     else if (key == 'b') {
         pintarBolas = !pintarBolas;
+    }
+    else if (key == 's') {
+        save("desenho.jpg");
     }
 }
 
