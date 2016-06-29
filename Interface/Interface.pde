@@ -27,6 +27,33 @@ boolean extraLines;
 String brushShape;
 color fillingColor;
 
+boolean pintarBolas = false;
+
+ArrayList<Bola> bolas = new ArrayList<Bola>();
+
+public class Bola {
+    int px;
+    int py;
+    int vx;
+    int vy;
+    int ay;
+    
+    public Bola (int x, int y) {
+        px = x;
+        py = y;
+        vx = (int) random(-5, 5);
+        vy = (int) random(-15, 0);
+        ay = 1;
+    }
+    
+    public void inc () {
+        px = px + vx;
+        py = py + vy;
+        vy = vy + ay;
+    }
+}
+
+
 public void setup() {
     size(800, 600, JAVA2D);
     createGUI();
@@ -56,6 +83,18 @@ public void setup() {
 public void draw() {
     confereCor();
     colorMode(RGB, 255, 255, 255, height);
+    
+    for (int i = 0; i < bolas.size(); i++) {
+        bolas.get(i).inc();
+        if (bolas.get(i).py > 600) {
+            bolas.remove(bolas.get(i));
+        }
+        else {
+            if (pintarBolas) {
+                ellipse(bolas.get(i).px, bolas.get(i).py, 3, 3);
+            }
+        }
+    }
 
     if ((mousePressed) && (mouseInDrawingRange()) && cor != "Background") {
         //tamanho do pincel
@@ -74,7 +113,11 @@ public void draw() {
               break;
         }
         
-        
+        if (random(10) > 9) {
+            Bola currBola = new Bola(mouseX, mouseY);
+            bolas.add(currBola);
+        }
+
         if (extraLines) {
           extraLines();
         }
@@ -182,6 +225,9 @@ void keyPressed() {
     }
     else if (key == 'k') {
         brushShape = "rect";
+    }
+    else if (key == 'b') {
+        pintarBolas = !pintarBolas;
     }
 }
 
