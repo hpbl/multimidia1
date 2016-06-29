@@ -29,20 +29,8 @@ public void setup() {
     createGUI();
     customGUI();
     background(backgroundCor);
-
-    float w = sketchPad1.getX() + sketchPad1.getWidth();
-    float i = sketchPad1.getX();
-
-    int larguraLinhas = int(w/12);
-    int linhas = 1;
-    stroke(0,0,0,18);
-    while(linhas < 12){
-        i = i + larguraLinhas;
-        line(i, sketchPad1.getY(), i, sketchPad1.getHeight());
-        linhas++;
-        
+    
     tamanhoPincel = 6;
-    }
 
     minim = new Minim(this);
     input = minim.getLineIn();
@@ -151,10 +139,20 @@ void keyPressed() {
         microfone = true;
     }
     else if (key == '+') {
-        tamanhoPincel = tamanhoPincel + 2;
+        if (tamanhoPincel < 100) {
+            tamanhoPincel = tamanhoPincel + 2;
+        }
     }
     else if (key == '-') {
-        tamanhoPincel = tamanhoPincel - 2;
+        if (tamanhoPincel > 2) {
+            tamanhoPincel = tamanhoPincel - 2;
+        }
+    }
+    else if (key == 'g') {
+        paintGrid();
+    }
+    else if (key == 'c') {
+        background(backgroundCor);
     }
 }
 
@@ -211,6 +209,20 @@ public boolean mouseInDrawingRange() {
 
 public void playSound() {
 
+}
+
+public void paintGrid() {
+    float w = sketchPad1.getX() + sketchPad1.getWidth();
+    float i = sketchPad1.getX();
+
+    int larguraLinhas = int(w/12);
+    int linhas = 1;
+    stroke(0,0,0,18);
+    while(linhas < 12){
+        i = i + larguraLinhas;
+        line(i, sketchPad1.getY(), i, sketchPad1.getHeight());
+        linhas++;
+    }
 }
 
 // Use this method to add additional statements
