@@ -229,10 +229,10 @@ public void paintGrid() {
 }
 
 public void extraLines() {
-    //grossura da reta = 2
-    strokeWeight(2);
+    //grossura da reta
+    strokeWeight(tamanhoPincel / 3);
     //o quão longe a minireta em volta da reta principal vai ser desenhada
-    int desvio = 10;
+    int desvio = 4 * (tamanhoPincel/3);
     //minireta
     line(mouseX + random(-desvio,desvio), mouseY + random(-desvio,desvio), pmouseX + random(-desvio,desvio), pmouseY + random(-desvio,desvio));
 }
