@@ -22,6 +22,9 @@ boolean microfone = false;
 boolean gravando = false;
 
 int notaOffset = 0;
+int tamanhoPincel;
+boolean extraLines;
+boolean pintarBolas = false;
 
 ArrayList<Bola> bolas = new ArrayList<Bola>();
 
@@ -52,18 +55,9 @@ public void setup() {
     createGUI();
     customGUI();
     background(backgroundCor);
-
-    float w = sketchPad1.getX() + sketchPad1.getWidth();
-    float i = sketchPad1.getX();
-
-    int larguraLinhas = int(w/12);
-    int linhas = 1;
-    stroke(0,0,0,18);
-    while(linhas < 12){
-        i = i + larguraLinhas;
-        line(i, sketchPad1.getY(), i, sketchPad1.getHeight());
-        linhas++;
-    }
+    
+    tamanhoPincel = 6;
+    extraLines = false;
 
     minim = new Minim(this);
     input = minim.getLineIn();
@@ -90,14 +84,15 @@ public void draw() {
             bolas.remove(bolas.get(i));
         }
         else {
-            ellipse(bolas.get(i).px, bolas.get(i).py, 3, 3);
-            //noStroke();
+            if (pintarBolas) {
+                ellipse(bolas.get(i).px, bolas.get(i).py, 3, 3);
+            }
         }
     }
 
     if ((mousePressed) && (mouseInDrawingRange()) && cor != "Background") {
-        //grossura da reta = 6
-        strokeWeight(6);
+        //tamanho do pincel
+        strokeWeight(tamanhoPincel);
         line(mouseX, mouseY, pmouseX, pmouseY);
         //grossura da reta = 2
         strokeWeight(2);
@@ -110,6 +105,10 @@ public void draw() {
             bolas.add(currBola);
         }
 
+        if (extraLines) {
+          extraLines();
+        }
+        
         float m1 = mouseX;
 
         float w = sketchPad1.getX() + sketchPad1.getWidth();
@@ -186,6 +185,28 @@ void keyPressed() {
         recorder.beginRecord();
         microfone = true;
     }
+    else if (key == '+') {
+        if (tamanhoPincel < 100) {
+            tamanhoPincel = tamanhoPincel + 2;
+        }
+    }
+    else if (key == '-') {
+        if (tamanhoPincel > 2) {
+            tamanhoPincel = tamanhoPincel - 2;
+        }
+    }
+    else if (key == 'g') {
+        paintGrid();
+    }
+    else if (key == 'c') {
+        background(backgroundCor);
+    }
+    else if (key == 'e') {
+        extraLines = !extraLines;
+    }
+    else if (key == 'b') {
+        pintarBolas = !pintarBolas;
+    }
 }
 
 void keyReleased() {
@@ -241,6 +262,29 @@ public boolean mouseInDrawingRange() {
 
 public void playSound() {
 
+}
+
+public void paintGrid() {
+    float w = sketchPad1.getX() + sketchPad1.getWidth();
+    float i = sketchPad1.getX();
+
+    int larguraLinhas = int(w/12);
+    int linhas = 1;
+    stroke(0,0,0,18);
+    while(linhas < 12){
+        i = i + larguraLinhas;
+        line(i, sketchPad1.getY(), i, sketchPad1.getHeight());
+        linhas++;
+    }
+}
+
+public void extraLines() {
+    //grossura da reta = 2
+    strokeWeight(2);
+    //o quão longe a minireta em volta da reta principal vai ser desenhada
+    int desvio = 10;
+    //minireta
+    line(mouseX + random(-desvio,desvio), mouseY + random(-desvio,desvio), pmouseX + random(-desvio,desvio), pmouseY + random(-desvio,desvio));
 }
 
 // Use this method to add additional statements
