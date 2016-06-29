@@ -23,6 +23,7 @@ boolean gravando = false;
 
 int notaOffset = 0;
 int tamanhoPincel;
+boolean extraLines;
 
 public void setup() {
     size(800, 600, JAVA2D);
@@ -31,6 +32,7 @@ public void setup() {
     background(backgroundCor);
     
     tamanhoPincel = 6;
+    extraLines = false;
 
     minim = new Minim(this);
     input = minim.getLineIn();
@@ -52,16 +54,14 @@ public void draw() {
     colorMode(RGB, 255, 255, 255, height);
 
     if ((mousePressed) && (mouseInDrawingRange()) && cor != "Background") {
-        //grossura da reta = 6
+        //tamanho do pincel
         strokeWeight(tamanhoPincel);
         line(mouseX, mouseY, pmouseX, pmouseY);
-        //grossura da reta = 2
-        strokeWeight(2);
-        //o quão longe a minireta em volta da reta principal vai ser desenhada
-        int desvio = 10;
-        //minireta
-        line(mouseX + random(-desvio,desvio), mouseY + random(-desvio,desvio), pmouseX + random(-desvio,desvio), pmouseY + random(-desvio,desvio));
-
+        
+        if (extraLines) {
+          extraLines();
+        }
+        
         float m1 = mouseX;
 
         float w = sketchPad1.getX() + sketchPad1.getWidth();
@@ -154,6 +154,9 @@ void keyPressed() {
     else if (key == 'c') {
         background(backgroundCor);
     }
+    else if (key == 'e') {
+        extraLines = !extraLines;
+    }
 }
 
 void keyReleased() {
@@ -223,6 +226,15 @@ public void paintGrid() {
         line(i, sketchPad1.getY(), i, sketchPad1.getHeight());
         linhas++;
     }
+}
+
+public void extraLines() {
+    //grossura da reta = 2
+    strokeWeight(2);
+    //o quão longe a minireta em volta da reta principal vai ser desenhada
+    int desvio = 10;
+    //minireta
+    line(mouseX + random(-desvio,desvio), mouseY + random(-desvio,desvio), pmouseX + random(-desvio,desvio), pmouseY + random(-desvio,desvio));
 }
 
 // Use this method to add additional statements
