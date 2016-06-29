@@ -184,19 +184,23 @@ public void draw() {
 }
 
 void keyPressed() {
-    if (key == 'r' && (!gravando)) {
-        gravando = true;
-        countAudios++;
-        recorder = minim.createRecorder(input, "audio" + countAudios + ".wav", true);
-        recorder.beginRecord();
+    //if (key == 'r' && (!gravando)) {
+    //    gravando = true;
+    //    countAudios++;
+    //    recorder = minim.createRecorder(input, "audio" + countAudios + ".wav", true);
+    //    recorder.beginRecord();
+    //}
+    if(key == 'r'){
+        recorder = minim.createRecorder(out, "audio" + countAudios + ".wav");        
+        recorder.beginRecord();        
     }
-    else if (key == 'm' && (!gravando)) {
-        gravando = true;
-        countAudios++;
-        recorder = minim.createRecorder(input, "audio" + countAudios + ".wav", true);
-        recorder.beginRecord();
-        microfone = true;
-    }
+    //else if (key == 'm' && (!gravando)) {
+    //    gravando = true;
+    //    countAudios++;
+    //    recorder = minim.createRecorder(input, "audio" + countAudios + ".wav", true);
+    //    recorder.beginRecord();
+    //    microfone = true;
+    //}
     else if (key == '+') {
         if (brushSize < 100) {
             brushSize = brushSize + 2;
@@ -235,19 +239,26 @@ void keyPressed() {
 
 void keyReleased() {
     gravando = false;
-    if (key == 'r') {
+    //if (key == 'r') {
+    //    recorder.endRecord();
+    //    recorder.save();
+    //    loopPlayer = minim.loadFile("audio" + countAudios + ".wav");
+    //    loopPlayer.loop();
+    //}
+    if(key == 'r'){
         recorder.endRecord();
         recorder.save();
         loopPlayer = minim.loadFile("audio" + countAudios + ".wav");
         loopPlayer.loop();
+        countAudios++;
     }
-    else if (key == 'm') {
-        recorder.endRecord();
-        recorder.save();
-        loopPlayer = minim.loadFile("audio" + countAudios + ".wav");
-        loopPlayer.loop();
-        microfone = false;
-    }
+    //else if (key == 'm') {
+    //    recorder.endRecord();
+    //    recorder.save();
+    //    loopPlayer = minim.loadFile("audio" + countAudios + ".wav");
+    //    loopPlayer.loop();
+    //    microfone = false;
+    //}
 }
 
 public void changeColor(String novacor) {
