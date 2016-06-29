@@ -22,8 +22,10 @@ boolean microfone = false;
 boolean gravando = false;
 
 int notaOffset = 0;
-int tamanhoPincel;
+int brushSize;
 boolean extraLines;
+String brushShape;
+color fillingColor;
 
 public void setup() {
     size(800, 600, JAVA2D);
@@ -31,8 +33,10 @@ public void setup() {
     customGUI();
     background(backgroundCor);
     
-    tamanhoPincel = 6;
+    brushSize = 6;
     extraLines = false;
+    brushShape = "line";
+    fillingColor = #ffffff;
 
     minim = new Minim(this);
     input = minim.getLineIn();
@@ -55,8 +59,21 @@ public void draw() {
 
     if ((mousePressed) && (mouseInDrawingRange()) && cor != "Background") {
         //tamanho do pincel
-        strokeWeight(tamanhoPincel);
-        line(mouseX, mouseY, pmouseX, pmouseY);
+        strokeWeight(brushSize);
+        fill(fillingColor);
+        
+        switch (brushShape) {
+          case "line":
+              line(mouseX, mouseY, pmouseX, pmouseY);
+              break;
+          case "triangle":
+              triangle(mouseX, mouseY, mouseX + 10, mouseY -10, mouseX + 20, mouseY);
+              break;
+          case "rect":
+              rect(mouseX, mouseY, 10, 10);
+              break;
+        }
+        
         
         if (extraLines) {
           extraLines();
@@ -139,13 +156,13 @@ void keyPressed() {
         microfone = true;
     }
     else if (key == '+') {
-        if (tamanhoPincel < 100) {
-            tamanhoPincel = tamanhoPincel + 2;
+        if (brushSize < 100) {
+            brushSize = brushSize + 2;
         }
     }
     else if (key == '-') {
-        if (tamanhoPincel > 2) {
-            tamanhoPincel = tamanhoPincel - 2;
+        if (brushSize > 2) {
+            brushSize = brushSize - 2;
         }
     }
     else if (key == 'g') {
@@ -156,6 +173,15 @@ void keyPressed() {
     }
     else if (key == 'e') {
         extraLines = !extraLines;
+    }
+    else if (key == 'l') {
+        brushShape = "line";
+    }
+    else if (key == 't') {
+        brushShape = "triangle";
+    }
+    else if (key == 'k') {
+        brushShape = "rect";
     }
 }
 
@@ -184,14 +210,17 @@ public void confereCor() {
     if (cor == "Red") {
         stroke(255, 0, 0, (height-mouseY));
         notaOffset = -12;
+        fillingColor = #ff0000;
     }
     else if (cor == "Green") {
         stroke(0, 255, 0, (height-mouseY));
         notaOffset = 0;
+        fillingColor = #00ff00;
     }
     else if (cor == "Blue") {
         stroke(0, 0, 255, (height-mouseY));
         notaOffset = 12;
+        fillingColor = #0000ff;
     }
     else {
         stroke(backgroundCor);
@@ -230,9 +259,9 @@ public void paintGrid() {
 
 public void extraLines() {
     //grossura da reta
-    strokeWeight(tamanhoPincel / 3);
+    strokeWeight(brushSize / 3);
     //o quão longe a minireta em volta da reta principal vai ser desenhada
-    int desvio = 4 * (tamanhoPincel/3);
+    int desvio = 4 * (brushSize/3);
     //minireta
     line(mouseX + random(-desvio,desvio), mouseY + random(-desvio,desvio), pmouseX + random(-desvio,desvio), pmouseY + random(-desvio,desvio));
 }
