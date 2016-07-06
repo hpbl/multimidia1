@@ -2,6 +2,7 @@ import g4p_controls.*;
 import ddf.minim.*;
 import ddf.minim.ugens.*;
 import processing.sound.*;
+import static javax.swing.JOptionPane.*;
 
 // variaveis para sons
 Minim minim;
@@ -71,6 +72,7 @@ public void setup() {
     createGUI();
     customGUI();
     background(backgroundCor);
+    surface.setTitle("Buba!");
     
     // grossura do pincel
     brushSize = 6;
@@ -94,6 +96,9 @@ public void setup() {
 
     midi.patch(wave.frequency);
     wave.patch(out);
+    
+    String x = "r: gravar loop" + System.lineSeparator() + "+/-: tamanho do pincel" + System.lineSeparator() + "c: limpar tela" + System.lineSeparator() + "e: linhas extras" + System.lineSeparator() + "l/t/k: tipo de pincel" + System.lineSeparator() + "b: bolas flutuantes" + System.lineSeparator() + "s: salva desenho";
+    showMessageDialog(null, x, "Buba!", ERROR_MESSAGE);
 }
 
 // funcao executada o tempo todo

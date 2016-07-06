@@ -20,7 +20,7 @@ public void clickRedButton(GButton source, GEvent event) { //_CODE_:buttonRed:35
   
   buttonRed.setText("cor escolhida");
   buttonGreen.setText("");
-  buttonBlue.setText("");
+  blueButton.setText("");
 } //_CODE_:buttonRed:352242:
 
 public void clickGreenButton(GButton source, GEvent event) { //_CODE_:buttonGreen:312446:
@@ -29,7 +29,7 @@ public void clickGreenButton(GButton source, GEvent event) { //_CODE_:buttonGree
   
   buttonRed.setText("");
   buttonGreen.setText("cor escolhida");
-  buttonBlue.setText("");
+  blueButton.setText("");
 } //_CODE_:buttonGreen:312446:
 
 public void clickBlueButton(GButton source, GEvent event) { //_CODE_:blueButton:505366:
@@ -38,7 +38,7 @@ public void clickBlueButton(GButton source, GEvent event) { //_CODE_:blueButton:
   
   buttonRed.setText("");
   buttonGreen.setText("");
-  buttonBlue.setText("cor escolhida");
+  blueButton.setText("cor escolhida");
 } //_CODE_:blueButton:505366:
 
 
@@ -49,23 +49,22 @@ public void createGUI(){
   G4P.messagesEnabled(false);
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setCursor(ARROW);
-  
   surface.setTitle("Sketch Window");
   labelCor = new GLabel(this, 0, 550, 200, 50);
   labelCor.setText("escolha a cor:");
   labelCor.setTextBold();
   labelCor.setOpaque(true);
-  
   sketchPad1 = new GSketchPad(this, 20, 20, 760, 510);
-  
   buttonRed = new GButton(this, 200, 550, 200, 50);
   buttonRed.setLocalColorScheme(GCScheme.RED_SCHEME);
   buttonRed.addEventHandler(this, "clickRedButton");
   buttonGreen = new GButton(this, 400, 550, 200, 50);
+  buttonGreen.setText("");
   buttonGreen.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   buttonGreen.addEventHandler(this, "clickGreenButton");
-  buttonBlue = new GButton(this, 600, 550, 200, 50);
-  buttonBlue.addEventHandler(this, "clickBlueButton");
+  blueButton = new GButton(this, 600, 549, 200, 50);
+  blueButton.setText("");
+  blueButton.addEventHandler(this, "clickBlueButton");
 }
 
 // Variable declarations 
@@ -74,4 +73,4 @@ GLabel labelCor;
 GSketchPad sketchPad1; 
 GButton buttonRed; 
 GButton buttonGreen; 
-GButton buttonBlue; 
+GButton blueButton; 
